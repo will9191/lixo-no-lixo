@@ -1,0 +1,49 @@
+.nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0.5em 1em;
+  align-items: center;
+  box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.1);
+
+  .icon {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+    cursor: pointer;
+    width: fit-content;
+
+    &:hover {
+      span:nth-child(2),
+      span:nth-child(3) {
+        width: 1.5em;
+      }
+    }
+
+    span {
+      content: "";
+      border-bottom: 2px solid;
+      border-bottom: 100%;
+      transition: 0.3s ease;
+    }
+
+    span:nth-child(1) {
+      width: 1.5em;
+    }
+    span:nth-child(2) {
+      width: 1em;
+    }
+    span:nth-child(3) {
+      width: 0.5em;
+    }
+  }
+
+  .logo {
+    justify-self: center;
+    font-size: 1.5em;
+  }
+
+  .info {
+    font-size: 1.5em;
+    justify-self: right;
+  }
+}
