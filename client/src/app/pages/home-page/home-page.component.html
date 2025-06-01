@@ -1,12 +1,13 @@
 <div class="container">
-  <div class="central">Vamos descartar? 😁</div>
+  <div class="central">
+    <div class="title">Vamos descartar? 😁</div>
+    <div class="sub-title">
+      Envie uma foto ou descrição sobre o tipo de material, e o ajudaremos a
+      fazer o descarte inteligente!
+    </div>
+  </div>
   <div class="chat">
     <div class="top">
-      <div [ngClass]="selectionOpen ? 'selection-container' : 'hidden'">
-        <button class="btn" (click)="takePhoto()">📸 Tirar Foto</button>
-        <button class="btn" (click)="takePhoto()">📁 Selecionar Foto</button>
-      </div>
-
       <div class="img-modal" *ngIf="photo">
         <div (click)="remove()" class="remove">x</div>
         <img
@@ -17,16 +18,14 @@
         />
       </div>
     </div>
-    <form class="search-field">
-      <ng-icon
-        (click)="openSelection()"
-        class="icon"
-        name="radixImage"
-      ></ng-icon>
-      <input class="input" type="text" placeholder="Imagem ou descrição" />
-      <button type="submit">
-        <ng-icon class="enter" name="phosphorArrowFatUpDuotone"></ng-icon>
-      </button>
-    </form>
+
+    <div class="buttons">
+      <div *ngIf="!photo" class="outline">Escrever ✍🏾</div>
+      <div *ngIf="!photo" class="fill" (click)="takePhoto()">
+        Enviar foto 📷
+      </div>
+
+      <div class="fill" *ngIf="photo">Descartar ♻️</div>
+    </div>
   </div>
 </div>

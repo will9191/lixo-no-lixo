@@ -9,8 +9,19 @@
 .central {
   margin-top: 60%;
   text-align: center;
-  font-size: 2em;
-  font-weight: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+
+  .title {
+    font-weight: 900;
+    font-size: 1.8em;
+  }
+
+  .sub-title {
+    font-weight: 400;
+    font-size: 1.2em;
+  }
 }
 
 .chat {
@@ -119,4 +130,33 @@
 .descarte {
   background: var(--senary-color);
   color: var(--tertiary-color);
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(auto, auto);
+  align-items: center;
+  justify-items: center;
+  padding: 0em 1em;
+  gap: 0.5em;
+  margin-bottom: 0.5em;
+
+  .outline {
+    width: 100%;
+    padding: 0.5em 1em;
+    background: var(--septenary-color);
+    color: #111111;
+    border: 1px solid var(--senary-color);
+    border-radius: 20px;
+    text-align: center;
+  }
+
+  .fill {
+    width: 100%;
+    padding: 0.5em 1em;
+    background: var(--quinary-color);
+    border: 1px solid transparent;
+    border-radius: 20px;
+    text-align: center;
+  }
 }
