@@ -7,25 +7,40 @@
     </div>
   </div>
   <div class="chat">
-    <div class="top">
-      <div class="img-modal" *ngIf="photo">
-        <div (click)="remove()" class="remove">x</div>
-        <img
-          class="selected-img"
-          *ngIf="photo"
-          [src]="photo"
-          alt="Foto capturada"
-        />
-      </div>
-    </div>
-
     <div class="buttons">
-      <div *ngIf="!photo" class="outline">Escrever ✍🏾</div>
-      <div *ngIf="!photo" class="fill" (click)="takePhoto()">
-        Enviar foto 📷
-      </div>
+      <div (click)="writePrompt()" class="outline">Escrever ✍🏾</div>
+      <div (click)="takePhoto()" class="fill">Enviar foto 📷</div>
+    </div>
+  </div>
+</div>
 
-      <div class="fill" *ngIf="photo">Descartar ♻️</div>
+<div [formGroup]="aiForm" class="prompt-full-container" *ngIf="isPromptOpen">
+  <div class="selection-container">
+    <img
+      class="selected-img"
+      *ngIf="image"
+      [src]="image"
+      alt="Foto capturada"
+      (click)="takePhoto()"
+    />
+    <div class="select-image" (click)="takePhoto()" *ngIf="!image">+</div>
+
+    <textarea
+      class="text-details"
+      formControlName="message"
+      placeholder="Detalhes adicionais sobre o descarte"
+      id=""
+    ></textarea>
+
+    <div class="actions-buttons">
+      <div (click)="cancel()" class="cancel">Cancelar</div>
+      <div
+        (click)="sendPrompt()"
+        [ngClass]="loading ? 'loading' : ''"
+        class="descarte"
+      >
+        Descartar ♻️
+      </div>
     </div>
   </div>
 </div>

@@ -3,17 +3,50 @@ import { NgIcon } from '@ng-icons/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { CommonModule } from '@angular/common';
+import { AiService } from '../../services/ai.service';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home-page',
-  imports: [NgIcon, CommonModule],
+  imports: [NgIcon, CommonModule, ReactiveFormsModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent {
-  constructor(private dialog: MatDialog) {}
+  aiForm: FormGroup;
+  image: string | null = null;
+  loading: boolean = false;
+  isPromptOpen: boolean = false;
+  data: any;
 
-  photo: string | null = null;
+  constructor(private fb: FormBuilder, private aiService: AiService) {
+    this.aiForm = this.fb.group({
+      message: [''],
+      image: [''],
+    });
+  }
+
+  sendPrompt() {
+    if (this.aiForm.invalid) return;
+    this.loading = true;
+    const { message, image } = this.aiForm.value;
+
+    this.aiService.sendPrompt(message, image).subscribe({
+      next: (data: any) => {
+        this.data = data;
+        console.log(data);
+        this.loading = false;
+        this.setPromptOpen(false);
+      },
+      error: (data: any) => {
+        this.loading = false;
+      },
+    });
+  }
+
+  setPromptOpen(value: boolean) {
+    this.isPromptOpen = value;
+  }
 
   async takePhoto() {
     const image = await Camera.getPhoto({
@@ -22,21 +55,19 @@ export class HomePageComponent {
       resultType: CameraResultType.DataUrl,
       source: CameraSource.Camera,
     });
-    this.photo = image.dataUrl!;
-    this.selectionOpen = false;
+
+    this.image = image.dataUrl!;
+    this.aiForm.patchValue({ image: this.image });
+    this.setPromptOpen(true);
   }
 
-  openSelection() {
-    this.selectionOpen = !this.selectionOpen;
+  writePrompt() {
+    this.setPromptOpen(true);
   }
 
-  selectionOpen: boolean = false;
-
-  search() {
-    console.log('search');
-  }
-
-  remove() {
-    this.photo = null;
+  cancel() {
+    this.image = null;
+    this.aiForm.reset();
+    this.setPromptOpen(false);
   }
 }
