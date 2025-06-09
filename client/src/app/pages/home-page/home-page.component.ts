@@ -37,6 +37,8 @@ export class HomePageComponent {
         console.log(data);
         this.loading = false;
         this.setPromptOpen(false);
+        this.image = null;
+        this.aiForm.reset();
       },
       error: (data: any) => {
         this.loading = false;
