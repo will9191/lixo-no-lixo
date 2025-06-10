@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="texts">
+    <span> Seja bem vindo(a) ao Lixo no Lixo!</span>
+    <span>
+      Este é um projeto desenvolvido para te auxiliar no descarte
+      inteligente</span
+    >
+    <span>Utilizamos de IA (Inteligência Artificial) para lhe ajudar</span>
+    <span>Quer saber mais sobre o projeto? Veja mais a seguir:</span>
+  </div>
+  <div class="links">
+    @for (m of media; track $index) {
+    <a href="{{ m.link }}" target="_blank">{{ m.icon }} {{ m.name }}</a>
+    }
+  </div>
+</div>

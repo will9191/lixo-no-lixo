@@ -1,10 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgIcon } from '@ng-icons/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { CommonModule } from '@angular/common';
 import { AiService } from '../../services/ai.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+
+interface IMessage {
+  part: string;
+  isUser: boolean;
+  image: string | null;
+}
 
 @Component({
   selector: 'app-home-page',
@@ -17,7 +23,7 @@ export class HomePageComponent {
   image: string | null = null;
   loading: boolean = false;
   isPromptOpen: boolean = false;
-  data: any;
+  responses: IMessage[] = [];
 
   constructor(private fb: FormBuilder, private aiService: AiService) {
     this.aiForm = this.fb.group({
@@ -31,19 +37,64 @@ export class HomePageComponent {
     this.loading = true;
     const { message, image } = this.aiForm.value;
 
+    const userMessage: IMessage = {
+      part: message,
+      isUser: true,
+      image: image,
+    };
+
     this.aiService.sendPrompt(message, image).subscribe({
       next: (data: any) => {
-        this.data = data;
-        console.log(data);
+        this.responses.push(userMessage);
+        this.setResponse(data);
         this.loading = false;
         this.setPromptOpen(false);
         this.image = null;
-        this.aiForm.reset();
+        this.aiForm.reset({
+          message: '',
+          image: null,
+        });
+        this.image = null;
       },
       error: (data: any) => {
         this.loading = false;
       },
     });
+  }
+
+  @ViewChild('scrollContainer') private scrollContainer!: ElementRef;
+
+  totalData: [] = [];
+
+  async setResponse(data: any = { response: '' }) {
+    const parts = data.message.split('\n\n');
+
+    for (const part of parts) {
+      const message: IMessage = {
+        part: part,
+        isUser: false,
+        image: null,
+      };
+      this.responses.push(message);
+      this.scrollToBottom();
+
+      await this.delay(2000);
+    }
+  }
+
+  private scrollToBottom() {
+    requestAnimationFrame(() => {
+      try {
+        this.scrollContainer.nativeElement.scrollTo({
+          top: this.scrollContainer.nativeElement.scrollHeight,
+          behavior: 'smooth',
+        });
+      } catch (err) {}
+    });
+  }
+
+  delay(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   setPromptOpen(value: boolean) {

@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="central">
+  <div class="central" *ngIf="!responses.length">
     <div class="title">Vamos descartar? 😁</div>
     <div class="sub-title">
       Envie uma foto ou descrição sobre o tipo de material, e o ajudaremos a
@@ -7,6 +7,19 @@
     </div>
   </div>
   <div class="chat">
+    <div *ngIf="responses.length" class="chat-response" #scrollContainer>
+      @for (res of responses; track $index) {
+      <div
+        [ngClass]="!res.isUser ? 'ai-baloon ' : 'user-baloon'"
+        class="baloon"
+      >
+        <img class="response-img" src="{{ res?.image }}" alt="" />
+        <div>
+          {{ res.part }}
+        </div>
+      </div>
+      }
+    </div>
     <div class="buttons">
       <div (click)="writePrompt()" class="outline">Escrever ✍🏾</div>
       <div (click)="takePhoto()" class="fill">Enviar foto 📷</div>
