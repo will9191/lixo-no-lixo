@@ -120,7 +120,10 @@ export class HomePageComponent {
 
   cancel() {
     this.image = null;
-    this.aiForm.reset();
+    this.aiForm.reset({
+      message: '',
+      image: null,
+    });
     this.setPromptOpen(false);
   }
 }
