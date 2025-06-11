@@ -5,6 +5,7 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { CommonModule } from '@angular/common';
 import { AiService } from '../../services/ai.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { BoldMarkdownPipe } from '../../pipes/bold-markdown.pipe';
 
 interface IMessage {
   part: string;
@@ -14,7 +15,7 @@ interface IMessage {
 
 @Component({
   selector: 'app-home-page',
-  imports: [NgIcon, CommonModule, ReactiveFormsModule],
+  imports: [NgIcon, CommonModule, ReactiveFormsModule, BoldMarkdownPipe],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
 })

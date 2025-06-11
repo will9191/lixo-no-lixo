@@ -1,22 +1,25 @@
 <div class="container">
-  <div class="central" *ngIf="!responses.length">
-    <div class="title">Vamos descartar? 😁</div>
-    <div class="sub-title">
-      Envie uma foto ou descrição sobre o tipo de material, e o ajudaremos a
-      fazer o descarte inteligente!
-    </div>
-  </div>
   <div class="chat">
+    <div class="central" *ngIf="!responses.length">
+      <div class="title">Vamos descartar? 😁</div>
+      <div class="sub-title">
+        Envie uma foto ou descrição sobre o tipo de material, e o ajudaremos a
+        fazer o descarte inteligente!
+      </div>
+    </div>
     <div *ngIf="responses.length" class="chat-response" #scrollContainer>
       @for (res of responses; track $index) {
       <div
         [ngClass]="!res.isUser ? 'ai-baloon ' : 'user-baloon'"
         class="baloon"
       >
-        <img class="response-img" src="{{ res?.image }}" alt="" />
-        <div>
-          {{ res.part }}
-        </div>
+        <img
+          class="response-img"
+          src="{{ res?.image }}"
+          alt=""
+          draggable="false"
+        />
+        <div [innerHTML]="res.part | boldMarkdown"></div>
       </div>
       }
     </div>

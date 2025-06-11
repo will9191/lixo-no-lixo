@@ -1,5 +1,6 @@
 .container {
   position: relative;
+  overflow: hidden;
 }
 
 .logo {
@@ -11,11 +12,11 @@
 }
 
 .central {
-  margin-top: 30%;
   text-align: center;
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+  margin-top: 2em;
 
   .title {
     font-weight: 900;
@@ -29,13 +30,17 @@
 }
 
 .chat {
+  display: flex;
+  flex-direction: column;
   margin: auto;
-  position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
   min-width: 100%;
   max-width: fit-content;
+  height: 90vh;
+  justify-content: space-between;
+  padding: 1em 0;
 
   .search-field {
     display: flex;
@@ -74,10 +79,14 @@
   padding: 0em 1em;
   gap: 0.5em;
   margin-bottom: 0.5em;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: -webkit-fill-available;
 
   @media not all and (max-width: 1200px) {
-    width: 50em;
     justify-self: center;
+    padding: 0 35em;
   }
 }
 
@@ -148,7 +157,7 @@
   background: var(--septenary-color);
   color: #111111;
   border: 1px solid var(--senary-color);
-  border-radius: 20px;
+  border-radius: 10px;
   text-align: center;
 }
 
@@ -157,7 +166,7 @@
   padding: 0.5em 1em;
   background: var(--quinary-color);
   border: 1px solid transparent;
-  border-radius: 20px;
+  border-radius: 10px;
   text-align: center;
 }
 
@@ -220,10 +229,9 @@
   overflow-x: hidden;
   gap: 0.5em;
   margin: 0em 1em 1em;
-  max-height: 65vmin;
-  padding: 0 0.5em 0 0;
+
   @media not all and (max-width: 1200px) {
-    width: 45em;
+    padding: 0 35em 2em;
     justify-self: center;
   }
 
