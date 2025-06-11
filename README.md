@@ -8,11 +8,11 @@ A solução será uma ferramenta digital que orienta os usuários a descartarem 
 
 # Setup Inicial ⭐
 
-Instale as dependências do projeto rodando `pip install -r requirements.txt`.
+- Instale as dependências do backend rodando `pip install -r requirements.txt`.
+- Dentro de `./client`, rode `npm i` para instalar as dependências do frontend.
+- No terminal coloque a variável de ambiente `GROQ_API_KEY` que pode ser pega com um dos mantainers do projeto.
 
-No terminal coloque a variável de ambiente `GROQ_API_KEY` que pode ser pega com um dos mantainers do projeto.
-
-# Rodando o Projeto 🚂
+# Rodando o Projeto 🚂💨
 
 Backend:
 
@@ -20,4 +20,10 @@ Backend:
 - Rode o comando `fastapi dev main.py` para iniciar o servidor do FastAPI.
 
 Frontend:
-...
+
+- Vá para o diretório `./client`
+- Rode o comando `npm start` para iniciar o servidor do frontend.
+
+# Considerações Finais 📝
+
+Aproveite o projeto e contribua com melhorias! Se tiver alguma dúvida, sinta-se à vontade para abrir uma issue ou entrar em contato com os mantenedores. Estamos aqui para ajudar! 🤝🌍

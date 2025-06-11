@@ -14,6 +14,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+# API Routes
 @app.get("/ai")
 async def root():
     return {"message": "This is the LixoNoLixo AI backend service."}
