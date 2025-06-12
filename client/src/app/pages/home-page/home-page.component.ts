@@ -64,9 +64,7 @@ export class HomePageComponent {
   }
 
   @ViewChild('scrollContainer') private scrollContainer!: ElementRef;
-
-  totalData: [] = [];
-
+  
   async setResponse(data: any = { response: '' }) {
     const parts = data.message.split('\n\n');
 
